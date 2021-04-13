@@ -47,3 +47,21 @@ bot.onText(/\/start/, (msg) => {
     });
 
 });
+
+bot.onText(/\/sair/, (msg) => {
+
+    // Delete Usuario do mongodb
+    CreateIdUser.deleteOne({
+      id_user: `${msg.chat.id}`
+    }).then((result) => {
+      if (!result){
+        bot.sendMessage(msg.chat.id, `Você não esta cadastrado \n/start para retomar inscrição`); 
+      }else {
+        bot.sendMessage(msg.chat.id, `INSCRIÇÂO CANCELADA\n/start para retomar inscrição \n${result}`); 
+      }
+    }).catch((err) => {
+      console.log("ERROR: ",err);
+    });
+
+});
+
