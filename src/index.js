@@ -74,3 +74,26 @@ bot.onText(/\/help/, (msg) => {
     \n/smartphone para Ofertas
     `); 
 });
+
+   
+bot.onText(/\/smartphone/, (msg) => {
+  fetch('')
+  .then(res => res.json())
+  .then(json => {
+    for (var i = 0; i < 5;i++){
+      const img = json.offers[i].thumbnail; 
+      const name_of = json.offers[i].name;
+      const price_of = json.offers[i].price;
+      const price_of_p = json.offers[i].installment.quantity;
+      const price_of_q = json.offers[i].installment.value;
+      const link_of = json.offers[i].link;
+  
+      bot.sendPhoto(msg.chat.id,`${img}`,{caption : `
+        ${name_of} 
+        \nPor apenas: R$ ${price_of},00 😱😱
+        \nou ${price_of_p}x de R$ ${price_of_q} 💳
+        \n🛒 Link de compra: ${link_of} 
+        `} );  
+    }
+  });
+});
