@@ -1,0 +1,16 @@
+{
+  "name": "promocoes_bot",
+  "version": "1.0.0",
+  "description": "Bot de promoções do telegram",
+  "main": "src/index.js",
+  "author": "jefte199@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "mongoose": "^5.12.3",
+    "node-fetch": "^2.6.1",
+    "node-telegram-bot-api": "^0.51.0"
+  }
+}
