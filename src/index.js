@@ -65,3 +65,12 @@ bot.onText(/\/sair/, (msg) => {
 
 });
 
+bot.onText(/\/help/, (msg) => {
+  bot.sendMessage(msg.chat.id, `Bem vindo ao promoções_BR_BOT Sou seu bot de ofertas
+    \nVocê pode me controlar enviando estes comandos:
+    \n/start para começar, se inscrever 
+    \n/sair para camcelar inscrição
+    \n/help me pedir ajuda
+    \n/smartphone para Ofertas
+    `); 
+});
