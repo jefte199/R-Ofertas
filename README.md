@@ -3,7 +3,7 @@
 
 ## Um BOT para o telegram que permite pesquisar ofertas e promoções
 
-`[URL_BOT:]` https://t.me/promocoes_brasil_bot
+`[URL_BOT:]` https://t.me/R_Ofertas_bot
 
 ## Em Desenvolvimento...
 
