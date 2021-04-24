@@ -9,6 +9,7 @@
     "start": "node src/index.js"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "mongoose": "^5.12.3",
     "node-fetch": "^2.6.1",
     "node-telegram-bot-api": "^0.51.0"
