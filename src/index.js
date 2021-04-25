@@ -1,3 +1,6 @@
+//import dotenv
+require('dotenv').config()
+
 //import lib
 const TelegramBot = require('node-telegram-bot-api');
 const mongoose = require('mongoose');
@@ -17,12 +20,12 @@ module.exports = mongoose.connect("mongodb://localhost/user_telegram").then(() =
 const CreateIdUser = mongoose.model('user');
 
 // BOT
-const token = '';
+const token = process.env.TOKEN_TELEGRAM;
 
 const bot = new TelegramBot(token, {polling: true});
 
 bot.onText(/\/start/, (msg) => {
-  bot.sendMessage(msg.chat.id, `Bem vindo ao Promoções BR\nTrazemos a você ofertas e promoções,\nPara buscar ofertas basta digitar /help`); 
+  bot.sendMessage(msg.chat.id, `Bem vindo ao R_Ofertas\nTrazemos a você ofertas e promoções,\nPara buscar ofertas basta digitar /help`); 
 
   CreateIdUser.findOne({
     // Pesquisar Usuario no mongodb
@@ -33,7 +36,7 @@ bot.onText(/\/start/, (msg) => {
         new CreateIdUser({
           id_user: msg.chat.id
         }).save().then((result) => {
-          console.log('OK, você esta inscrito');
+          console.log('OK, inscrito adicionado');
         }).catch((err) => {
           console.log("ERROR: ",err);
         });
@@ -57,7 +60,7 @@ bot.onText(/\/sair/, (msg) => {
       if (!result){
         bot.sendMessage(msg.chat.id, `Você não esta cadastrado \n/start para retomar inscrição`); 
       }else {
-        bot.sendMessage(msg.chat.id, `INSCRIÇÂO CANCELADA\n/start para retomar inscrição \n${result}`); 
+        bot.sendMessage(msg.chat.id, `INSCRIÇÂO CANCELADA\n/start para retomar inscrição`); 
       }
     }).catch((err) => {
       console.log("ERROR: ",err);
@@ -66,18 +69,19 @@ bot.onText(/\/sair/, (msg) => {
 });
 
 bot.onText(/\/help/, (msg) => {
-  bot.sendMessage(msg.chat.id, `Bem vindo ao promoções_BR_BOT Sou seu bot de ofertas
+  bot.sendMessage(msg.chat.id, `Bem vindo ao R_Ofertas, Sou seu bot de ofertas
     \nVocê pode me controlar enviando estes comandos:
     \n/start para começar, se inscrever 
     \n/sair para camcelar inscrição
     \n/help me pedir ajuda
     \n/smartphone para Ofertas
-    `); 
-});
+  `); 
 
-   
+
 bot.onText(/\/smartphone/, (msg) => {
-  fetch('')
+  const token_lomadee = process.env.ID_LOMADEE;
+  
+  fetch(`http://sandbox-api.lomadee.com/v3/${token_lomadee}/offer/_category/77?sourceId=37057130`)
   .then(res => res.json())
   .then(json => {
     for (var i = 0; i < 5;i++){
@@ -97,3 +101,18 @@ bot.onText(/\/smartphone/, (msg) => {
     }
   });
 });
+
+});
+
+bot.on('message', (msg) => {
+    
+  var Hi = "hi";
+  if (msg.text.toString().toLowerCase().indexOf(Hi) === 0) {
+  bot.sendMessage(msg.chat.id,"Hello dear user");
+  } 
+      
+  });
+
+  bot.on('new_chat_members', (msg) => {
+    bot.sendMessage(msg.chat.id, `Olá ${msg.from.first_name}, bem vindo ao Devs SC!! Conte-nos um pouco sobre você, com o que trabalha e onde, se possivel é claro`)
+ });
