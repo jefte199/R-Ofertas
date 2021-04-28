@@ -5,6 +5,19 @@ require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api');
 const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const express = require('express');
+
+//For deploy in Heroku
+const app = express();
+
+app.set('port', (process.env.PORT || 3333));
+
+app.get('/', function(request, response) {
+  const result = 'App is running'
+  response.send(result);
+}).listen(app.get('port'), function() {0
+  console.log('App is running, server is listening on port ', app.get('port'));
+});
 
 //import model
 const ModelUser = require('./model');
