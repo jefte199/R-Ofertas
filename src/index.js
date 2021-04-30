@@ -15,6 +15,8 @@ app.set('port', (process.env.PORT || 3333));
 app.get('/', function(request, response) {
   const result = 'App is running'
   response.send(result);
+}).listen(app.get('port'), function() {0
+  console.log('App is running, server is listening on port ', app.get('port'));
 });
 
 //import model
